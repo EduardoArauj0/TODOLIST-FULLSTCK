@@ -6,8 +6,17 @@ const tasksController = require("../controllers/tasksController");
 const tasksMiddlewares = require("../middlewares/tasksMiddlewares");
 
 router.get("/tasks", tasksController.getAll);
-router.post("/tasks", tasksMiddlewares.validateBody, tasksController.createTask);
+router.post(
+  "/tasks",
+  tasksMiddlewares.validateFieldTitle,
+  tasksController.createTask
+);
 router.delete("/tasks/:id", tasksController.deleteTask);
-router.put("/tasks/:id", tasksMiddlewares.validateBody, tasksController.updateTask);
+router.put(
+  "/tasks/:id",
+  tasksMiddlewares.validateFieldStatus,
+  tasksMiddlewares.validateFieldTitle,
+  tasksController.updateTask
+);
 
 module.exports = router;
