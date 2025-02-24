@@ -1,9 +1,26 @@
 const tbody = document.querySelector('tbody');
+const addForm = document.querySelector('.add-form')
+const inputTask = document.querySelector('.input-task')
 
 const fetchTasks = async () => {
     const response = await fetch('http://localhost:3333/tasks');
     const tasks = await response.json();
     return tasks;
+}
+
+const addTask = async (event) => {
+    event.preventDefault();
+
+    const task = {title: inputTask.value}
+    await fetch('http://localhost:3333/tasks', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(task)
+    });
+
+
+    loadTasks();
+    inputTask.value = '';
 }
 
 const createElement = (tag, innerText = '', innerHTML = '') => {
@@ -63,3 +80,18 @@ const createRow = (task) => {
 
     return tr;
 }
+
+const loadTasks = async () => {
+    const tasks = await fetchTasks();
+
+    tbody.innerHTML = '';
+
+    tasks.forEach((task) => {
+        const tr = createRow(task);
+        tbody.appendChild(tr);
+    });
+}
+
+addForm.addEventListener('submit', addTask)
+
+loadTasks();
