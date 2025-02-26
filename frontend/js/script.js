@@ -23,6 +23,24 @@ const addTask = async (event) => {
     inputTask.value = '';
 }
 
+const deleteTask = async (id) => {
+    await fetch(`http://localhost:3333/tasks${id}`, {
+        method: 'delete',
+    });
+
+    loadTasks();
+}
+
+const updateTask = async ({ id, title, status}) => {
+    await fetch(`http://localhost:3333/tasks${id}`, {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ title, status}),
+    });
+
+    loadTasks();
+}
+
 const formatDate = (dateUTC) => {
     const options = { dateStyle: 'long', timeStyle: 'short'}
     const date = new Date(dateUTC).toLocaleString('pt-br', options);
@@ -68,11 +86,15 @@ const createRow = (task) => {
 
     const select = createSelect(status);
 
+    select.addEventListener('change', ({target}) => updateTask({ ... task, status: target.value}));
+
     const editButton = createElement('button', '','<span class="material-symbols-outlined">edit</span>');
     const deleteButton = createElement('button', '','<span class="material-symbols-outlined">delete</span>');
 
    editButton.classList.add('btn-action');
    deleteButton.classList.add('btn-action');
+
+   deleteButton.addEventListener('click', () => {deleteTask(id)});
 
    tdStatus.appendChild(select);
 
