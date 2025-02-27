@@ -24,7 +24,7 @@ const addTask = async (event) => {
 }
 
 const deleteTask = async (id) => {
-    await fetch(`http://localhost:3333/tasks${id}`, {
+    await fetch(`http://localhost:3333/tasks/${id}`, {
         method: 'delete',
     });
 
@@ -32,7 +32,7 @@ const deleteTask = async (id) => {
 }
 
 const updateTask = async ({ id, title, status}) => {
-    await fetch(`http://localhost:3333/tasks${id}`, {
+    await fetch(`http://localhost:3333/tasks/${id}`, {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ title, status}),
@@ -66,7 +66,7 @@ const createSelect = (value) => {
     const options = `
     <option value="pendente">pendente</option>
     <option value="em andamento">em andamento</option>
-    <option value="concluido">concluido</option>
+    <option value="concluída">concluída</option>
     `;
 
     const select = createElement('select', '', options);
@@ -104,7 +104,7 @@ const createRow = (task) => {
     editForm.appendChild(editInput);
 
     editButton.addEventListener('click', () => {
-        tdTitle.innerHTML = '';
+        tdTitle.innerText = '';
         tdTitle.appendChild(editForm);
     });
 

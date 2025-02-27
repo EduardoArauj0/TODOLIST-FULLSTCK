@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
     margin: 0;
@@ -12,7 +12,7 @@ body {
 }
 
 main {
-    background-color: white;
+    background-color: #FFF;
     border-radius: 8px;
     padding: 20px;
     width: 90%;
@@ -103,7 +103,6 @@ select:hover {
     margin-right: 5px;
 }
 
-.btn-action:nth-child(2){
+.btn-action:nth-child(2) {
     background-color: rgba(237, 42, 42, 0.9);
-    margin-right: 5px;
 }
